@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zootopia | Huellitas City</title>
+    <!-- FontAwesome & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --primary-dark: #ee5253;
+            --secondary: #4ECDC4;
+            --secondary-dark: #3bbaa2;
+            --accent: #FFE66D;
+            --dark: #2F2E41;
+            --light: #F7F9FC;
+            --white: #FFFFFF;
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+            --shadow-lg: 0 15px 35px rgba(0,0,0,0.12);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .logo-text, .btn {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        /* --- HUELLAS ANIMADAS Y DECORATIVAS --- */
+        .bg-paws {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.04;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%232F2E41" d="M256 224c-79.5 0-144 64.5-144 144s64.5 144 144 144 144-64.5 144-144-64.5-144-144-144zm-128-32c26.5 0 48-28.7 48-64s-21.5-64-48-64-48 28.7-48 64 21.5 64 48 64zm256 0c26.5 0 48-28.7 48-64s-21.5-64-48-64-48 28.7-48 64 21.5 64 48 64zM64 320c26.5 0 48-28.7 48-64s-21.5-64-48-64-48 28.7-48 64 21.5 64 48 64zm384 0c26.5 0 48-28.7 48-64s-21.5-64-48-64-48 28.7-48 64 21.5 64 48 64z"/></svg>');
+            background-size: 180px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--dark);
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(255, 107, 107, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .logo-text {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--dark);
+            border: 2px solid var(--dark);
+        }
+
+        .btn-outline:hover {
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 60px 0 100px;
+            position: relative;
+            background: linear-gradient(135deg, #FFF9E6 0%, #E8F8F5 100%);
+            border-radius: 0 0 50px 50px;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 14px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-size: 52px;
+            line-height: 1.15;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .hero-title span {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image-container {
+            position: relative;
+            text-align: center;
+        }
+
+        .hero-img {
+            width: 100%;
+            max-width: 480px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-lg);
+            object-fit: cover;
+            border: 8px solid var(--white);
+        }
+
+        .floating-card {
+            position: absolute;
+            background: var(--white);
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .fc-1 {
+            top: 20px;
+            left: -20px;
+        }
+
+        .fc-2 {
+            bottom: 20px;
+            right: -20px;
+            animation-delay: -2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* --- SECCIÓN URGENCIA --- */
+        .emergency-banner {
+            margin-top: -40px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 24px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        .emergency-info h3 {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .emergency-phone {
+            font-size: 28px;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- SERVICIOS Y CUIDADOS --- */
+        .section-header {
+            text-align: center;
+            margin: 90px 0 50px;
+        }
+
+        .section-tag {
+            color: var(--secondary);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+        }
+
+        .section-title {
+            font-size: 38px;
+            color: var(--dark);
+            margin-top: 8px;
+        }
+
+        .services-grid, .care-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card, .care-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .service-card:hover, .care-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-img-wrapper {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-img {
+            transform: scale(1.08);
+        }
+
+        .service-badge, .care-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255,255,255,0.9);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .service-body, .care-body {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .service-title, .care-title {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-desc, .care-desc {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        /* --- MASCOTAS --- */
+        .pets-section {
+            margin: 90px 0;
+        }
+
+        .pets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+        }
+
+        .pet-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .pet-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pet-img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+        }
+
+        .pet-body {
+            padding: 20px;
+        }
+
+        .pet-icon {
+            font-size: 30px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .pet-title {
+            font-size: 21px;
+            margin-bottom: 8px;
+        }
+
+        .pet-desc {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .service-price {
+            display: inline-block;
+            margin-top: 12px;
+            background: #FFF3C4;
+            color: var(--dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        /* --- CALCULADORA INTERACTIVA --- */
+        .calculator-section {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 50px;
+            margin: 90px 0;
+            box-shadow: var(--shadow-md);
+            border: 2px dashed var(--secondary);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .calc-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .form-control {
+            padding: 12px 18px;
+            border-radius: var(--radius-sm);
+            border: 2px solid #E2E8F0;
+            font-family: inherit;
+            font-size: 16px;
+            transition: border 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .calc-result {
+            background: linear-gradient(135deg, #FFF9E6 0%, #FFF3C4 100%);
+            padding: 30px;
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+
+        .calc-result-number {
+            font-size: 48px;
+            color: var(--primary);
+            font-weight: 700;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        /* --- FORMULARIO DE AGENDAMIENTO --- */
+        .appointment-section {
+            background: var(--dark);
+            color: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 60px 40px;
+            margin-bottom: 90px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .appointment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .appointment-info h2 {
+            font-size: 38px;
+            margin-bottom: 16px;
+            color: var(--white);
+        }
+
+        .appointment-info p {
+            color: #A0AEC0;
+            margin-bottom: 30px;
+        }
+
+        .appointment-form {
+            background: var(--white);
+            padding: 32px;
+            border-radius: var(--radius-md);
+            color: var(--dark);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #1A1926;
+            color: var(--white);
+            padding: 60px 0 30px;
+            border-top: 5px solid var(--primary);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-desc {
+            color: #A0AEC0;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-title {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            color: #A0AEC0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #718096;
+            font-size: 14px;
+        }
+
+        /* --- MODALES --- */
+        .modal, .care-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            padding: 20px;
+        }
+
+        .modal-content, .care-modal-box {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: modalIn 0.3s ease;
+            text-align: left;
+        }
+
+        @keyframes modalIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-modal, .care-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            background: none;
+            border: none;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .hero-grid, .calculator-section, .appointment-grid, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 40px;
+            }
+
+            .emergency-banner {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    
+        .video-section{margin-top:45px;padding:35px 0;}
+        .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;}
+        .video-card{background:#fff;border-radius:20px;padding:14px;box-shadow:0 10px 28px rgba(0,0,0,.12);}
+        .video-card iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:14px;display:block;}
+        .video-card h3{margin:15px 5px 6px;}
+        .video-card p{margin:0 5px 8px;color:#666;}
+    </style>
+
+    <style id="imagenes-completas">
+        .service-img, .pet-img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            display: block;
+            border-radius: 14px;
+            margin-bottom: 14px;
+        }
+        .pet-img { height: 160px; }
+        .service-card, .pet-card { overflow: hidden; }
+    </style>
+
+    <style id="zootopia-theme">
+        :root{
+            --city-blue:#1677b7;
+            --sky:#dff4ff;
+            --leaf:#52a96b;
+            --gold:#f5c84b;
+            --orange:#f28c38;
+            --dark:#17324d;
+            --cream:#fffaf0;
+        }
+        body{
+            background:linear-gradient(180deg,#dff4ff 0%,#f7fbff 42%,#fffaf0 100%) !important;
+            color:var(--dark);
+        }
+        header{
+            background:linear-gradient(135deg,#0e5f9b,#1695c7 55%,#52a96b) !important;
+            border-bottom:5px solid var(--gold);
+        }
+        header nav a{
+            color:#fff !important;
+            font-weight:800;
+        }
+        .hero{
+            position:relative;
+            overflow:hidden;
+            background:
+                linear-gradient(rgba(11,78,122,.78),rgba(18,137,165,.70)),
+                url("https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1600&q=80") center/cover !important;
+            min-height:470px;
+        }
+        .hero::after{
+            content:"🐾 🦊 🐰 🐶 🐱 🐢 🐦 🐠";
+            position:absolute;
+            left:0;right:0;bottom:18px;
+            text-align:center;
+            font-size:30px;
+            letter-spacing:10px;
+            opacity:.95;
+        }
+        .hero h1,.hero h2,.hero p{position:relative;z-index:2}
+        .hero h1{
+            text-shadow:0 4px 14px rgba(0,0,0,.35);
+        }
+        .section-title{
+            color:var(--city-blue) !important;
+            font-weight:900;
+        }
+        .services-grid,.pets-grid,.care-grid{
+            gap:24px !important;
+        }
+        .service-card,.pet-card,.care-card{
+            background:#fff !important;
+            border:3px solid #d8edf5 !important;
+            border-radius:24px !important;
+            box-shadow:0 10px 28px rgba(23,50,77,.13) !important;
+            transition:transform .2s, box-shadow .2s;
+        }
+        .service-card:hover,.pet-card:hover,.care-card:hover{
+            transform:translateY(-7px);
+            box-shadow:0 16px 32px rgba(23,50,77,.2) !important;
+        }
+        .service-card::before,.pet-card::before,.care-card::before{
+            content:"🐾";
+            display:block;
+            font-size:25px;
+            margin:14px 0 0 20px;
+        }
+        .service-img,.pet-img{
+            height:200px !important;
+            border-radius:18px !important;
+            object-fit:cover !important;
+        }
+        #mascotas, .pets-section{
+            background:linear-gradient(135deg,#e9f9ee,#e7f5ff) !important;
+            border-top:6px solid var(--leaf);
+            border-bottom:6px solid var(--gold);
+        }
+        .calculator,.calculator-section{
+            background:linear-gradient(135deg,#fff,#eaf8ff) !important;
+            border:4px solid var(--city-blue) !important;
+            border-radius:28px !important;
+        }
+        button,.btn{
+            background:linear-gradient(135deg,#f28c38,#f5c84b) !important;
+            color:#17324d !important;
+            border:0 !important;
+            font-weight:900 !important;
+            border-radius:999px !important;
+        }
+        footer{
+            background:linear-gradient(135deg,#17324d,#0e5f9b) !important;
+            color:#fff !important;
+        }
+    </style>
+
+    <style id="zootopia-structure-v2">
+        .zp-city-hero{
+            position:relative;
+            min-height:540px;
+            padding:70px 7%;
+            display:flex;
+            align-items:center;
+            background:
+                linear-gradient(90deg,rgba(8,48,82,.92) 0%,rgba(8,48,82,.72) 45%,rgba(8,48,82,.25) 100%),
+                url("https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1800&q=85") center/cover;
+            overflow:hidden;
+            color:white;
+        }
+        .zp-city-hero:before{
+            content:"";
+            position:absolute;inset:auto 0 0 0;height:90px;
+            background:linear-gradient(transparent,rgba(9,42,64,.7));
+        }
+        .zp-hero-copy{position:relative;z-index:2;max-width:650px}
+        .zp-kicker{
+            display:inline-block;padding:8px 16px;border-radius:999px;
+            background:#f5c84b;color:#17324d;font-weight:900;margin-bottom:16px;
+        }
+        .zp-hero-copy h1{font-size:clamp(42px,6vw,76px);margin:0 0 12px}
+        .zp-hero-copy p{font-size:19px;line-height:1.6}
+        .zp-photo{
+            position:absolute;right:7%;bottom:40px;z-index:3;width:245px;
+            background:white;padding:10px;border-radius:18px;
+            box-shadow:0 16px 35px rgba(0,0,0,.3);transform:rotate(3deg);
+        }
+        .zp-photo img{width:100%;height:300px;object-fit:cover;border-radius:12px;display:block}
+        .zp-photo small{display:block;color:#17324d;text-align:center;font-weight:700;padding:8px 2px 2px}
+        .zp-map{
+            padding:48px 6%;background:#f4fbff;
+        }
+        .zp-map-title{text-align:center;color:#1677b7;font-size:34px;margin:0 0 10px}
+        .zp-map-sub{text-align:center;max-width:800px;margin:0 auto 30px}
+        .zp-districts{
+            display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;max-width:1100px;margin:auto;
+        }
+        .zp-district{
+            min-height:170px;border-radius:24px;padding:24px;color:#fff;
+            box-shadow:0 10px 24px rgba(23,50,77,.15);position:relative;overflow:hidden;
+            background-size: cover;
+            background-position: center;
+        }
+        .zp-district h3{font-size:24px;margin:0 0 8px; position:relative; z-index:2;}
+        .zp-district p{margin:0;line-height:1.5; position:relative; z-index:2;}
+        .zp-district::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            border-radius: 24px;
+        }
+        .zp-d1{background-image: url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=600&q=80');}
+        .zp-d2{background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80');}
+        .zp-d3{background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80');}
+        .zp-d4{background-image: url('https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=600&q=80');}
+        .zp-d5{background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80');}
+        .zp-d6{background-image: url('https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=600&q=80');}
+
+        .zp-police{
+            max-width:1100px;margin:30px auto;padding:28px;
+            background:#17324d;color:white;border-radius:25px;
+            display:flex;gap:25px;align-items:center;
+        }
+        .zp-police-badge{
+            min-width:80px;height:80px;border-radius:50%;display:grid;place-items:center;
+            background:#f5c84b;color:#17324d;font-size:40px;
+        }
+        .zp-police h3{margin:0 0 7px;color:#f5c84b}
+        @media(max-width:800px){
+            .zp-photo{display:none}
+            .zp-districts{grid-template-columns:1fr}
+            .zp-city-hero{padding:60px 7%}
+            .zp-police{margin:25px 5%}
+        }
+    </style>
+</head>
+<body>
+
+<section class="zp-city-hero">
+  <div class="zp-hero-copy">
+    <span class="zp-kicker">🏙️ HUELLITAS CITY</span>
+    <h1>Una ciudad para todas las mascotas</h1>
+    <p>Inspirada en la idea de una gran metrópolis animal: diferentes especies, diferentes zonas y un mismo lugar para convivir y recibir cuidados veterinarios.</p>
+    <p><strong>🐰 Aquí comienza tu aventura veterinaria.</strong></p>
+  </div>
+  <div class="zp-photo">
+    <img src="https://cdn11.bigcommerce.com/s-ydriczk/products/87922/images/89816/Disneys-Zootropolis-Zootopia-Nick-Wilde-and-Judy-Hopps-Team-cardboard-cutout-stand-in-buy-now-at-starstills__62297.1471725551.450.659.jpg?c=2" alt="Judy Hopps y Nick Wilde representados por cosplayers">
+    <small>Inspiración: Judy & Nick</small>
+  </div>
+</section>
+
+<section class="zp-map">
+  <h2 class="zp-map-title">🗺️ Mapa de Huellitas City</h2>
+  <p class="zp-map-sub">La película presenta una metrópolis de mamíferos dividida en distintos distritos. Esta página adapta esa idea a una clínica veterinaria ficticia.</p>
+  <div class="zp-districts">
+    <article class="zp-district zp-d1"><h3>🏙️ Centro Animal</h3><p>Consultas generales, vacunas y atención para las mascotas de toda la ciudad.</p></article>
+    <article class="zp-district zp-d2"><h3>🌿 Distrito Bosque</h3><p>Espacio pensado para animales que necesitan tranquilidad, ejercicio y rehabilitación.</p></article>
+    <article class="zp-district zp-d3"><h3>☀️ Zona Tropical</h3><p>Cuidados especiales para aves, peces y otras mascotas de ambientes cálidos.</p></article>
+    <article class="zp-district zp-d4"><h3>❄️ Zona Fresca</h3><p>Un concepto visual inspirado en los sectores de clima frío de la ciudad animal.</p></article>
+    <article class="zp-district zp-d5"><h3>💧 Mundo Acuático</h3><p>Organiza la atención y orientación para peces y mascotas relacionadas con el agua.</p></article>
+    <article class="zp-district zp-d6"><h3>🏥 Distrito Huellitas</h3><p>Hospitalización, diagnóstico, odontología, cirugía y rehabilitación veterinaria.</p></article>
+  </div>
+
+  <div class="zp-police">
+    <div class="zp-police-badge">🐰</div>
+    <div><h3>🚔 Patrulla de Huellitas City</h3>
+    <p>Como homenaje visual a la aventura de Judy Hopps, esta sección representa la idea de proteger y ayudar a los habitantes de la ciudad.</p></div>
+  </div>
+</section>
+
+<div class="bg-paws"></div>
+
+<!-- HEADER / NAV -->
+<header>
+    <div class="container nav-container">
+        <a href="#" class="logo">
+            <div class="logo-icon"><i class="fa-solid fa-paw"></i></div>
+            <div class="logo-text">Clínica <span>Huellitas</span></div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#inicio"><i class="fa-solid fa-house"></i> Inicio</a></li>
+            <li><a href="#servicios"><i class="fa-solid fa-stethoscope"></i> Servicios</a></li>
+            <li><a href="#mascotas"><i class="fa-solid fa-paw"></i> Mascotas</a></li>
+            <li><a href="#calculadora"><i class="fa-solid fa-calculator"></i> Calculadora Edad</a></li>
+            <li><a href="#contacto"><i class="fa-solid fa-calendar-check"></i> Citas</a></li>
+        </ul>
+        <a href="#contacto" class="btn btn-primary"><i class="fa-solid fa-bone"></i> Agendar Cita</a>
+    </div>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero" id="inicio">
+    <div class="container hero-grid">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fa-solid fa-heart"></i> Atención Veterinaria con Amor
+            </div>
+            <h1 class="hero-title">
+                Cuidamos de tus <span>mejores amigos</span> como familia 🐾
+            </h1>
+            <p class="hero-subtitle">
+                Consultas, cirugías, urgencias 24/7 y peluquería profesional. Todo en un espacio cálido, moderno y equipado para su bienestar.
+            </p>
+            <div class="hero-buttons">
+                <a href="#contacto" class="btn btn-primary"><i class="fa-solid fa-calendar-plus"></i> Reservar Turno</a>
+                <a href="#servicios" class="btn btn-outline"><i class="fa-solid fa-shield-dog"></i> Ver Servicios</a>
+            </div>
+        </div>
+        <div class="hero-image-container">
+            <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800&q=80" alt="Perro feliz en veterinaria" class="hero-img">
+            <div class="floating-card fc-1">
+                <i class="fa-solid fa-award" style="font-size:24px; color:var(--primary)"></i>
+                <div>
+                    <strong>+10 Años</strong>
+                    <p style="font-size:12px; color:#666">De experiencia médica</p>
+                </div>
+            </div>
+            <div class="floating-card fc-2">
+                <i class="fa-solid fa-user-doctor" style="font-size:24px; color:var(--secondary)"></i>
+                <div>
+                    <strong>Atención 24/7</strong>
+                    <p style="font-size:12px; color:#666">Urgencias veterinarias</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BANNER DE URGENCIA -->
+<div class="container">
+    <div class="emergency-banner">
+        <div class="emergency-info">
+            <h3><i class="fa-solid fa-truck-medical"></i> ¿Tienes una urgencia veterinaria?</h3>
+            <p>Nuestro equipo de guardia médica está disponible a cualquier hora del día.</p>
+        </div>
+        <a href="tel:5550192834" class="emergency-phone">
+            <i class="fa-solid fa-phone-volume"></i> (504) 9319-2834
+        </a>
+    </div>
+</div>
+
+<!-- SERVICIOS -->
+<section class="container" id="servicios">
+    <div class="section-header">
+        <span class="section-tag">Nuestras Especialidades</span>
+        <h2 class="section-title">Servicios Creados para su Salud y Alegría</h2>
+    </div>
+
+    <div class="services-grid">
+        <!-- Servicio 1 -->
+        <div class="service-card">
+            <div class="service-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=600&q=80" alt="Consulta Veterinaria" class="service-img">
+                <span class="service-badge">Preventiva</span>
+            </div>
+            <div class="service-body">
+                <h3 class="service-title">Consulta General y Vacunas</h3>
+                <p class="service-desc">Chequeos, desparasitación, vacunación y seguimiento preventivo para mantener a tu mascota saludable.</p>
+                <button class="btn btn-secondary" onclick="openModal('Consulta General y Vacunas')">Saber Más</button>
+            </div>
+        </div>
+
+        <!-- Servicio 2 -->
+        <div class="service-card">
+            <div class="service-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=600&q=80" alt="Peluquería para mascotas" class="service-img">
+                <span class="service-badge">Estética</span>
+            </div>
+            <div class="service-body">
+                <h3 class="service-title">Peluquería y Spa</h3>
+                <p class="service-desc">Baños, cortes, limpieza de oídos, corte de uñas y cuidados de higiene para perros y otras mascotas.</p>
+                <button class="btn btn-secondary" onclick="openModal('Peluquería y Spa')">Saber Más</button>
+            </div>
+        </div>
+
+        <!-- Servicio 3 -->
+        <div class="service-card">
+            <div class="service-img-wrapper">
+                <img src="https://www.clinicaveterinariaejea.com/wp-content/uploads/2014/05/clinica_veterinaria_ejea_132-1024x682.jpeg" alt="Cirugía veterinaria" class="service-img">
+                <span class="service-badge">Especializada</span>
+            </div>
+            <div class="service-body">
+                <h3 class="service-title">Cirugía Veterinaria</h3>
+                <p class="service-desc">Procedimientos quirúrgicos con preparación, monitoreo y cuidados posteriores para una recuperación segura.</p>
+                <button class="btn btn-secondary" onclick="openModal('Cirugía Veterinaria')">Saber Más</button>
+            </div>
+        </div>
+
+        <!-- Servicio 4 -->
+        <div class="service-card">
+            <div class="service-img-wrapper">
+                <img src="https://clinicaprotectoradeanimales.co/wp-content/uploads/2026/03/limpieza-dental-perros-clinica-veterinaria-bogota.webp" alt="Odontología veterinaria" class="service-img">
+                <span class="service-badge">Dental</span>
+            </div>
+            <div class="service-body">
+                <h3 class="service-title">Odontología Veterinaria</h3>
+                <p class="service-desc">Revisión dental, limpieza y orientación para prevenir problemas de dientes y encías.</p>
+                <button class="btn btn-secondary" onclick="openModal('Odontología Veterinaria')">Saber Más</button>
+            </div>
+        </div>
+
+        <!-- Servicio 5 -->
+        <div class="service-card">
+            <div class="service-img-wrapper">
+                <img src="https://cediagvet.com/wp-content/uploads/diagnostico-por-imagen-en-medicina-veterinaria.jpg" alt="Ecografía veterinaria" class="service-img">
+                <span class="service-badge">Diagnóstico</span>
+            </div>
+            <div class="service-body">
+                <h3 class="service-title">Ecografía y Diagnóstico</h3>
+                <p class="service-desc">Apoyo diagnóstico mediante estudios de imagen para conocer mejor el estado de salud de tu mascota.</p>
+                <button class="btn btn-secondary" onclick="openModal('Ecografía y Diagnóstico')">Saber Más</button>
+            </div>
+        </div>
+
+        <!-- Servicio 6 -->
+        <div class="service-card">
+            <div class="service-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=600&q=80" alt="Hospitalización veterinaria" class="service-img">
+                <span class="service-badge">Cuidados</span>
+            </div>
+            <div class="service-body">
+                <h3 class="service-title">Hospitalización</h3>
+                <p class="service-desc">Supervisión y cuidados veterinarios para mascotas que necesitan permanecer en observación o recuperación.</p>
+                <button class="btn btn-secondary" onclick="openModal('Hospitalización')">Saber Más</button>
+            </div>
+        </div>
+
+        <!-- Servicio 7 -->
+        <div class="service-card">
+            <div class="service-img-wrapper">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQksnR_yx2hlLkEnceOGm48hfGx1mdmeNO301gETpOezUta4eufiXnJjPvb&s=10" alt="Nutrición para mascotas" class="service-img">
+                <span class="service-badge">Nutrición</span>
+            </div>
+            <div class="service-body">
+                <h3 class="service-title">Nutrición y Dietas</h3>
+                <p class="service-desc">Orientación sobre alimentación, porciones y necesidades nutricionales según la mascota y su etapa de vida.</p>
+                <button class="btn btn-secondary" onclick="openModal('Nutrición y Dietas')">Saber Más</button>
+            </div>
+        </div>
+
+        <!-- Servicio 8 -->
+        <div class="service-card">
+            <div class="service-img-wrapper">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSohBeGg77latt6dPXjEHJoQP_y5dY5QkmQDoJ1orwBag&s=10" alt="Microchip para mascotas" class="service-img">
+                <span class="service-badge">Identificación</span>
+            </div>
+            <div class="service-body">
+                <h3 class="service-title">Identificación y Microchip</h3>
+                <p class="service-desc">Servicio de identificación para facilitar el cuidado y la localización de mascotas en caso de extravío.</p>
+                <button class="btn btn-secondary" onclick="openModal('Identificación y Microchip')">Saber Más</button>
+            </div>
+        </div>
+
+        <!-- Servicio 9 -->
+        <div class="service-card">
+            <div class="service-img-wrapper">
+                <img src="https://forvet-main.s3.sa-east-1.amazonaws.com/public/images/academicUnits/electroestimulacion_motora.jpg" alt="Fisioterapia veterinaria" class="service-img">
+                <span class="service-badge">Rehabilitación</span>
+            </div>
+            <div class="service-body">
+                <h3 class="service-title">Fisioterapia y Rehabilitación</h3>
+                <p class="service-desc">Apoyo en la recuperación de movilidad y bienestar mediante ejercicios y cuidados de rehabilitación.</p>
+                <button class="btn btn-secondary" onclick="openModal('Fisioterapia y Rehabilitación')">Saber Más</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MASCOTAS -->
+<div style="text-align:center;max-width:900px;margin:10px auto 24px;padding:0 15px">
+  <h2 class="section-title">🐾 Conoce a los habitantes de Huellitas City</h2>
+  <p>Perros, gatos, conejos, aves y más especies, organizados por sus propios distritos y necesidades.</p>
+</div>
+
+<section class="container pets-section" id="mascotas">
+    <div class="section-header">
+        <span class="section-tag">Amigos de Todas las Especies</span>
+        <h2 class="section-title">Más Mascotas, Más Cuidados 🐾</h2>
+        <p style="color:#666; margin-top:12px;">Atendemos diferentes tipos de animales de compañía con cuidados adaptados a sus necesidades.</p>
+    </div>
+    <div class="pets-grid">
+        <div class="pet-card">
+            <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=600&q=80" alt="Perro" class="pet-img">
+            <div class="pet-body"><div class="pet-icon">🐶</div><h3 class="pet-title">Perros</h3><p class="pet-desc">Consultas, vacunas, higiene, nutrición y atención preventiva.</p><span class="service-price">Cuidado integral</span></div>
+        </div>
+        <div class="pet-card">
+            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80" alt="Gato" class="pet-img">
+            <div class="pet-body"><div class="pet-icon">🐱</div><h3 class="pet-title">Gatos</h3><p class="pet-desc">Medicina preventiva, vacunación, nutrición y bienestar felino.</p><span class="service-price">Cuidado felino</span></div>
+        </div>
+        <div class="pet-card">
+            <img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=600&q=80" alt="Conejo" class="pet-img">
+            <div class="pet-body"><div class="pet-icon">🐰</div><h3 class="pet-title">Conejos</h3><p class="pet-desc">Revisión general, orientación nutricional y cuidados preventivos.</p><span class="service-price">Animales pequeños</span></div>
+        </div>
+        <div class="pet-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMpqQQmcqVDB6_goBSnEeZBb8EOXXjlKgo_8izxz0S8Qmr1tZmg3vT2Cyf&s=10" alt="Ave mascota" class="pet-img">
+            <div class="pet-body"><div class="pet-icon">🦜</div><h3 class="pet-title">Aves</h3><p class="pet-desc">Orientación sobre alimentación, higiene y bienestar de aves de compañía.</p><span class="service-price">Cuidado de aves</span></div>
+        </div>
+        <div class="pet-card">
+            <img src="https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=600&q=80" alt="Peces" class="pet-img">
+            <div class="pet-body"><div class="pet-icon">🐠</div><h3 class="pet-title">Peces</h3><p class="pet-desc">Orientación básica sobre alimentación, ambiente y cuidados del acuario.</p><span class="service-price">Cuidado acuático</span></div>
+        </div>
+        <div class="pet-card">
+            <img src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?auto=format&fit=crop&w=600&q=80" alt="Hámster" class="pet-img">
+            <div class="pet-body"><div class="pet-icon">🐹</div><h3 class="pet-title">Hámsters</h3><p class="pet-desc">Revisión, recomendaciones de alimentación y cuidados del hábitat.</p><span class="service-price">Pequeños mamíferos</span></div>
+        </div>
+        <div class="pet-card">
+            <img src="https://www.dresseldivers.com/wp-content/uploads/green-turtle-habitat-2.jpg" alt="Tortuga" class="pet-img">
+            <div class="pet-body"><div class="pet-icon">🐢</div><h3 class="pet-title">Tortugas</h3><p class="pet-desc">Orientación sobre ambiente, alimentación y cuidados generales.</p><span class="service-price">Mascotas exóticas</span></div>
+        </div>
+        <div class="pet-card">
+            <img src="https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&w=600&q=80" alt="Cobaya" class="pet-img">
+            <div class="pet-body"><div class="pet-icon">🐹</div><h3 class="pet-title">Cobayas</h3><p class="pet-desc">Controles, alimentación y recomendaciones para un hábitat saludable.</p><span class="service-price">Cuidado especial</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- CUIDADOS DE LOS ANIMALITOS -->
+<section id="cuidados" class="container care-section">
+    <div class="section-header">
+        <span class="section-tag">Bienestar y Protección</span>
+        <h2 class="section-title">Cuidado de Nuestros Animalitos</h2>
+        <p style="color:#666; margin-top:12px;">En Huellitas City, cada animalito merece respeto, cariño y cuidados responsables.</p>
+    </div>
+    
+    <div class="care-grid">
+        <!-- Cuidado 1 -->
+        <div class="care-card" data-title="💧 Agua Fresca" data-info="Proporciona agua limpia y fresca todos los días. Revisa que el recipiente esté limpio y que siempre tenga agua disponible.">
+            <span class="care-badge">Salud</span>
+            <div class="care-body">
+                <h3 class="care-title"><i class="fa-solid fa-tint" style="color:var(--secondary);"></i> Agua Fresca</h3>
+                <p class="care-desc">Hidratación limpia y constante para asegurar el buen funcionamiento de su organismo cada día.</p>
+                <button class="btn btn-secondary">Saber Más</button>
+            </div>
+        </div>
+
+        <!-- Cuidado 2 -->
+        <div class="care-card" data-title="🍎 Alimentación Adecuada" data-info="Ofrece alimentos apropiados para su especie, edad y necesidades. Evita darles comida que pueda resultar dañina para ellos.">
+            <span class="care-badge">Nutrición</span>
+            <div class="care-body">
+                <h3 class="care-title"><i class="fa-solid fa-apple-alt" style="color:var(--primary);"></i> Alimentación</h3>
+                <p class="care-desc">Ofrece alimentos apropiados para su especie, edad y necesidades, evitando comidas dañinas.</p>
+                <button class="btn btn-secondary">Saber Más</button>
+            </div>
+        </div>
+
+        <!-- Cuidado 3 -->
+        <div class="care-card" data-title="🏠 Espacio Seguro" data-info="Mantén su espacio limpio, cómodo y protegido de peligros. Cada mascota necesita un ambiente adecuado para descansar y sentirse segura.">
+            <span class="care-badge">Hogar</span>
+            <div class="care-body">
+                <h3 class="care-title"><i class="fa-solid fa-home" style="color:var(--secondary);"></i> Espacio Seguro</h3>
+                <p class="care-desc">Mantén su entorno limpio, cómodo y protegido de peligros para que pueda descansar tranquilo.</p>
+                <button class="btn btn-secondary">Saber Más</button>
+            </div>
+        </div>
+
+        <!-- Cuidado 4 -->
+        <div class="care-card" data-title="🩺 Control Veterinario" data-info="Las revisiones veterinarias ayudan a detectar problemas de salud y a mantener al día los cuidados preventivos recomendados para cada mascota.">
+            <span class="care-badge">Preventivo</span>
+            <div class="care-body">
+                <h3 class="care-title"><i class="fa-solid fa-stethoscope" style="color:var(--primary);"></i> Veterinario</h3>
+                <p class="care-desc">Revisiones médicas frecuentes para detectar problemas a tiempo y mantener los cuidados al día.</p>
+                <button class="btn btn-secondary">Saber Más</button>
+            </div>
+        </div>
+
+        <!-- Cuidado 5 -->
+        <div class="care-card" data-title="❤️ Cariño y Respeto" data-info="Trátalos con paciencia, cariño y respeto. Nunca uses el maltrato como forma de educación o corrección.">
+            <span class="care-badge">Afecto</span>
+            <div class="care-body">
+                <h3 class="care-title"><i class="fa-solid fa-heart" style="color:var(--primary);"></i> Cariño y Respeto</h3>
+                <p class="care-desc">Trátalos con paciencia y amor. Jamás utilices el maltrato como forma de educación.</p>
+                <button class="btn btn-secondary">Saber Más</button>
+            </div>
+        </div>
+
+        <!-- Cuidado 6 -->
+        <div class="care-card" data-title="🎾 Juego y Ejercicio" data-info="Dales oportunidades adecuadas para jugar y moverse según su especie, edad y condición. También necesitan suficiente descanso.">
+            <span class="care-badge">Actividad</span>
+            <div class="care-body">
+                <h3 class="care-title"><i class="fa-solid fa-paw" style="color:var(--secondary);"></i> Juego y Ejercicio</h3>
+                <p class="care-desc">Espacios ideales para moverse, jugar y liberar energía según su especie y vitalidad.</p>
+                <button class="btn btn-secondary">Saber Más</button>
+            </div>
+        </div>
+
+        <!-- Cuidado 7 -->
+        <div class="care-card" data-title="👀 Observación Diaria" data-info="Observa cambios importantes en su comportamiento, apetito, actividad o aspecto y coméntalos con un adulto responsable y el veterinario cuando sea necesario.">
+            <span class="care-badge">Atención</span>
+            <div class="care-body">
+                <h3 class="care-title"><i class="fa-solid fa-eye" style="color:var(--primary);"></i> Observación</h3>
+                <p class="care-desc">Vigila cambios en su conducta, apetito o energía para actuar de inmediato si algo cambia.</p>
+                <button class="btn btn-secondary">Saber Más</button>
+            </div>
+        </div>
+
+        <!-- Cuidado 8 -->
+        <div class="care-card" data-title="🚫 Protección contra el Maltrato" data-info="Nunca maltrates, abandones ni hagas daño a un animal. Si una mascota necesita ayuda, busca a un adulto responsable o a un profesional veterinario.">
+            <span class="care-badge">Protección</span>
+            <div class="care-body">
+                <h3 class="care-title"><i class="fa-solid fa-hand-paper" style="color:var(--secondary);"></i> No al Maltrato</h3>
+                <p class="care-desc">Protección absoluta contra el abandono y el daño. Defiende siempre su bienestar.</p>
+                <button class="btn btn-secondary">Saber Más</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="care-message" style="text-align:center; margin-top:35px; background:#FFF3C4; padding:18px; border-radius:var(--radius-md);">
+        <strong>🤝 Recuerda:</strong> los animalitos son seres vivos que necesitan atención, protección y un hogar donde se sientan seguros.
+    </div>
+</section>
+
+<!-- VIDEOS -->
+<section class="container video-section" id="videos-cuidados">
+    <div class="section-header">
+        <span class="section-tag">Multimedia</span>
+        <h2>🎥 Videos de veterinaria para nuestras mascotas</h2>
+        <p>Aprende sobre revisiones veterinarias, higiene dental y cuidados de perros y gatos.</p>
+    </div>
+    <div class="video-grid">
+        <article class="video-card">
+            <iframe src="https://www.youtube-nocookie.com/embed/-NVHn19CnDY" title="Cuidados básicos para nuestras mascotas" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            <h3>🐾 Cuidados básicos para nuestras mascotas</h3>
+            <p>Video en español sobre alimentación, vacunación, desparasitación, seguridad y bienestar de mascotas.</p>
+            <a href="https://youtu.be/-NVHn19CnDY" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="margin-top:10px; text-decoration:none; display:inline-block; font-size:14px;">
+                <i class="fa-brands fa-youtube"></i> Ver directo en YouTube
+            </a>
+        </article>
+        <article class="video-card">
+            <iframe src="https://www.youtube-nocookie.com/embed/LR2vdYnk9tI" title="Cuidados y bienestar animal" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            <h3>🏠 Cuidados y bienestar animal</h3>
+            <p>Información en español sobre alimentación, higiene, salud, educación y tenencia responsable de animales de compañía.</p>
+            <a href="https://youtu.be/LR2vdYnk9tI" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="margin-top:10px; text-decoration:none; display:inline-block; font-size:14px;">
+                <i class="fa-brands fa-youtube"></i> Ver directo en YouTube
+            </a>
+        </article>
+    </div>
+</section>
+
+<!-- CALCULADORA EDAD MASCOTA -->
+<section class="container" id="calculadora">
+    <div class="calculator-section">
+        <div>
+            <span class="section-tag">Herramienta Interactiva 🐶🐱</span>
+            <h2 style="font-size:32px; margin-top:8px;">Calcula la Edad Humana de tu Mascota</h2>
+            <p style="color:#666; margin-top:12px;">¿Sabías que un año de perro o gato no equivale exactamente a 7 años humanos? ¡Calcula la edad real aquí!</p>
+            
+            <form class="calc-form" style="margin-top:20px;" onsubmit="calculatePetAge(event)">
+                <div class="form-group">
+                    <label>Tipo de Mascota:</label>
+                    <select id="petType" class="form-control">
+                        <option value="dog">Perro 🐶</option>
+                        <option value="cat">Gato 🐱</option>
+                        <option value="rabbit">Conejo 🐰</option>
+                        <option value="bird">Ave 🦜</option>
+                        <option value="fish">Pez 🐠</option>
+                        <option value="hamster">Hámster 🐹</option>
+                        <option value="turtle">Tortuga 🐢</option>
+                        <option value="guinea-pig">Cobaya 🐹</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Edad Actual (en años):</label>
+                    <input type="number" id="petAge" class="form-control" min="1" max="25" value="2" required>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-calculator"></i> Calcular Edad</button>
+            </form>
+        </div>
+
+        <div class="calc-result">
+            <h3>Edad equivalente humana:</h3>
+            <div class="calc-result-number" id="resultAge">24 Años</div>
+            <p id="resultText" style="color:#666; margin-top:10px;">¡Tu mascota está en la juventud plena!</p>
+        </div>
+    </div>
+</section>
+
+<!-- FORMULARIO DE RESERVA / CITAS -->
+<section class="container" id="contacto">
+    <div class="appointment-section">
+        <div class="appointment-grid">
+            <div class="appointment-info">
+                <h2>Agenda una Visita 🗓️</h2>
+                <p>Completa el formulario y nuestro equipo te confirmará el turno a la brevedad.</p>
+
+                <div style="display:flex; flex-direction:column; gap:20px; margin-top:30px;">
+                    <div style="display:flex; gap:16px; align-items:center;">
+                        <div style="width:48px; height:48px; background:rgba(255,255,255,0.1); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:20px;"><i class="fa-solid fa-location-dot"></i></div>
+                        <div>
+                            <strong>Ubicación:</strong>
+                            <p style="color:#A0AEC0; font-size:14px;">Av. Principal de las Mascotas #456, Ciudad Canina</p>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; gap:16px; align-items:center;">
+                        <div style="width:48px; height:48px; background:rgba(255,255,255,0.1); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:20px;"><i class="fa-solid fa-clock"></i></div>
+                        <div>
+                            <strong>Horario de Atención:</strong>
+                            <p style="color:#A0AEC0; font-size:14px;">Lunes a Sábado: 8:00 AM - 8:00 PM | Urgencias 24h</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form class="appointment-form" onsubmit="submitAppointment(event)">
+                <h3 style="margin-bottom:20px; text-align:center;">Datos del Turno</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Tu Nombre:</label>
+                        <input type="text" class="form-control" placeholder="Ej. Ana García" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre de Mascota:</label>
+                        <input type="text" class="form-control" placeholder="Ej. Firulais" required>
+                    </div>
+                </div>
+
+                <div class="form-grid" style="margin-top:12px;">
+                    <div class="form-group">
+                        <label>Tipo de Mascota:</label>
+                        <select class="form-control">
+                            <option>Perro 🐶</option>
+                            <option>Gato 🐱</option>
+                            <option>Conejo 🐰</option>
+                            <option>Ave 🦜</option>
+                            <option>Pez 🐠</option>
+                            <option>Hámster 🐹</option>
+                            <option>Tortuga 🐢</option>
+                            <option>Cobaya 🐹</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Edad de la Mascota:</label>
+                        <input type="number" class="form-control" min="0" max="40" placeholder="Ej. 3">
+                    </div>
+                </div>
+
+                <div class="form-grid" style="margin-top:12px;">
+                    <div class="form-group">
+                        <label>Teléfono de Contacto:</label>
+                        <input type="tel" class="form-control" placeholder="Ej. 555-1234" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Servicio Requerido:</label>
+                        <select class="form-control">
+                            <option>Consulta Médica</option>
+                            <option>Vacunación y Desparasitación</option>
+                            <option>Peluquería / Baño</option>
+                            <option>Limpieza Dental</option>
+                            <option>Cirugía Veterinaria</option>
+                            <option>Ecografía y Diagnóstico</option>
+                            <option>Hospitalización</option>
+                            <option>Nutrición y Dietas</option>
+                            <option>Identificación y Microchip</option>
+                            <option>Fisioterapia y Rehabilitación</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top:12px;">
+                    <label>Mensaje o Síntomas (Opcional):</label>
+                    <textarea class="form-control" rows="3" placeholder="Detalles sobre tu mascota..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width:100%; margin-top:20px;"><i class="fa-solid fa-paper-plane"></i> Confirmar Cita</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container footer-grid">
+        <div>
+            <div class="footer-logo">
+                <i class="fa-solid fa-paw" style="color:var(--primary)"></i> Veterinaria Huellitas
+            </div>
+            <p class="footer-desc">Ofreciendo medicina de calidad, empatía y dedicación constante para la salud integral de tus peluditos.</p>
+            <div class="social-icons">
+                <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+
+        <div>
+            <h4 class="footer-title">Enlaces Rápidos</h4>
+            <ul class="footer-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#mascotas">Mascotas</a></li>
+                <li><a href="#calculadora">Calculadora</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4 class="footer-title">Especialidades</h4>
+            <ul class="footer-links">
+                <li><a href="#">Cirugía General</a></li>
+                <li><a href="#">Odontología Veterinaria</a></li>
+                <li><a href="#">Ecografía y Diagnóstico</a></li>
+                <li><a href="#">Hospitalización</a></li>
+                <li><a href="#">Nutrición y Dietas</a></li>
+                <li><a href="#">Peluquería y Spa</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4 class="footer-title">Contacto</h4>
+            <p style="color:#A0AEC0; font-size:14px; margin-bottom:8px;"><i class="fa-solid fa-envelope" style="color:var(--accent)"></i> contacto@huellitas.com</p>
+            <p style="color:#A0AEC0; font-size:14px;"><i class="fa-solid fa-phone" style="color:var(--accent)"></i> (504) 9319-2834</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Veterinaria Huellitas. Todos los derechos reservados. Creado con ❤️ para las mascotas.</p>
+    </div>
+</footer>
+
+<!-- MODAL SERVICIOS -->
+<div class="modal" id="infoModal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <h2 id="modalTitle" style="color:var(--primary); margin-bottom:12px;">Servicio</h2>
+        <p id="modalDesc" style="color:#555;">Información detallada del servicio veterinario.</p>
+        <button class="btn btn-primary" onclick="closeModal()" style="margin-top:20px; width:100%;">Entendido</button>
+    </div>
+</div>
+
+<!-- MODAL CUIDADOS -->
+<div class="care-modal" id="careModal">
+    <div class="care-modal-box">
+        <button class="care-close" onclick="closeCareModal()">&times;</button>
+        <h2 id="careModalTitle" style="color:var(--primary); margin-bottom:12px;">Cuidado</h2>
+        <p id="careModalInfo" style="color:#555; font-size:16px; line-height:1.6;"></p>
+        <button class="btn btn-primary" onclick="closeCareModal()" style="margin-top:20px; width:100%;">Entendido</button>
+    </div>
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+    function openModal(serviceNombre) {
+        document.getElementById('modalTitle').innerText = serviceNombre;
+        document.getElementById('modalDesc').innerText = 'Contamos con profesionales capacitados e instalaciones de vanguardia para garantizar la seguridad y confort de tu mascota durante su atención en ' + serviceNombre + '.';
+        document.getElementById('infoModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('infoModal').style.display = 'none';
+    }
+
+    function openCareModal(title, info) {
+        document.getElementById('careModalTitle').innerText = title;
+        document.getElementById('careModalInfo').innerText = info;
+        document.getElementById('careModal').style.display = 'flex';
+    }
+
+    function closeCareModal() {
+        document.getElementById('careModal').style.display = 'none';
+    }
+
+    function calculatePetAge(e) {
+        e.preventDefault();
+        const type = document.getElementById('petType').value;
+        const age = parseInt(document.getElementById('petAge').value);
+        let humanAge = 0;
+        let status = '';
+
+        if (type === 'dog') {
+            if (age === 1) humanAge = 15;
+            else if (age === 2) humanAge = 24;
+            else humanAge = 24 + (age - 2) * 5;
+        } else if (type === 'cat') {
+            if (age === 1) humanAge = 15;
+            else if (age === 2) humanAge = 24;
+            else humanAge = 24 + (age - 2) * 4;
+        } else if (type === 'rabbit') {
+            humanAge = age <= 1 ? 12 : 12 + (age - 1) * 6;
+        } else if (type === 'bird') {
+            humanAge = age * 5;
+        } else if (type === 'fish') {
+            humanAge = age * 4;
+        } else if (type === 'hamster') {
+            humanAge = age * 18;
+        } else if (type === 'turtle') {
+            humanAge = age * 3;
+        } else if (type === 'guinea-pig') {
+            humanAge = age * 10;
+        }
+
+        if (age < 3) status = '¡Tu mascota es un joven lleno de energía!';
+        else if (age < 8) status = '¡Tu mascota está en la etapa madura y plena!';
+        else status = '¡Tu mascota es un sabio senior que requiere cuidados especiales!';
+
+        document.getElementById('resultAge').innerText = humanAge + ' Años';
+        document.getElementById('resultText').innerText = status;
+    }
+
+    function submitAppointment(e) {
+        e.preventDefault();
+        alert('🐾 ¡Muchas gracias! Tu solicitud de cita ha sido registrada. Nos pondremos en contacto muy pronto.');
+        e.target.reset();
+    }
+
+    document.querySelectorAll('.care-card').forEach(function(card){
+        card.addEventListener('click', function(){
+            const title = card.getAttribute('data-title');
+            const info = card.getAttribute('data-info');
+            openCareModal(title, info);
+        });
+    });
+
+    window.addEventListener('click', function(e) {
+        const infoModal = document.getElementById('infoModal');
+        const careModal = document.getElementById('careModal');
+        if (e.target === infoModal) closeModal();
+        if (e.target === careModal) closeCareModal();
+    });
+
+    document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape') {
+            closeModal();
+            closeCareModal();
+        }
+    });
+</script>
+
+</body>
+</html>
